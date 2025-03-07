@@ -31,14 +31,14 @@ class ArticleController extends Controller
         // Проверка введенных данных
         // Если будут ошибки, то возникнет исключение
         // Иначе возвращаются данные формы
-        $data = $request->validate([
+        $request->validate([
             'name' => 'required|unique:articles',
             'body' => 'required|max:100',
         ]);
 
         $article = new Article();
         // Заполнение статьи данными из формы
-        $article->fill($data);
+        $article->fill($request->all());
         // При ошибках сохранения возникнет исключение
         $article->save();
 
